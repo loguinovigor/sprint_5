@@ -1,25 +1,7 @@
-# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-*$py.class
-
-# Virtual environments
-.venv/
-venv/
-env/
-
-# Pytest cache
 .pytest_cache/
-
-# VSCode
 .vscode/
-
-# macOS
 .DS_Store
-
-# Coverage / reports
 .coverage
 htmlcov/
-
-# Drivers / downloads
-drivers/
