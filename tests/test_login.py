@@ -14,5 +14,7 @@ class TestLogin:
         WebDriverWait(driver, 10).until(EC.visibility_of_element_located(LoginFormLocators.EMAIL_INPUT)).send_keys(EXISTING_EMAIL)
         driver.find_element(*LoginFormLocators.PASSWORD_INPUT).send_keys(EXISTING_PASSWORD)
         driver.find_element(*LoginFormLocators.SUBMIT_BUTTON).click()
-        # assert: появился признак авторизации (кнопка Выйти/ссылка Профиль)
-        assert WebDriverWait(driver, 15).until(EC.presence_of_element_located(HeaderLocators.LOGOUT_BUTTON)),                 "После логина не появился признак авторизации"
+        authorized_marker = WebDriverWait(driver, 15).until(EC.presence_of_element_located(HeaderLocators.LOGOUT_BUTTON))
+        actual = authorized_marker is not None
+        expected = True
+        assert actual == expected

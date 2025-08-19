@@ -3,7 +3,8 @@ from utils.urls import BASE_URL
 
 @pytest.mark.logout
 class TestLogout:
-    def test_logout_button_presence_placeholder(self, driver):
+    def test_logout_placeholder(self, driver):
         driver.get(BASE_URL)
-        # Плейсхолдер-тест: в реальной среде предварительно нужно залогиниться.
-        assert True
+        actual = driver.current_url.startswith(BASE_URL)
+        expected = True
+        assert actual == expected
