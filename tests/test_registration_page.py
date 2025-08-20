@@ -1,5 +1,6 @@
 import random
 from selenium.webdriver.remote.webdriver import WebDriver
+from src.helpers import generate_email, generate_password
 from src.locators import LoginForm, MainPageLocators
 from src.locators import RegistrationFormLocators
 from selenium.webdriver.support.wait import WebDriverWait
@@ -7,10 +8,23 @@ from selenium.webdriver.support import expected_conditions
 
 class TestRegistration:
 
-    def test_succesfull_registration(self, driver: WebDriver, main_page, email, password, create_account):
+    def test_succesfull_registration(self, driver: WebDriver, main_page):
+        # Шаги регистрации пользователя
+        driver.find_element(*MainPageLocators.LOGGIN_BUTTON).click()
+        WebDriverWait(driver, 5).until(
+            expected_conditions.element_to_be_clickable(LoginForm.WITHOUT_ACCOUNT_BUTTON)).click()
+        WebDriverWait(driver, 5).until(
+            expected_conditions.visibility_of_element_located(RegistrationFormLocators.REGISTRATION_BUTTON))
+        email = generate_email()
+        password = generate_password()
+        driver.find_element(*RegistrationFormLocators.EMAIL).send_keys(email)
+        driver.find_element(*RegistrationFormLocators.PASSWORD).send_keys(password)
+        driver.find_element(*RegistrationFormLocators.SUBMIT_PASSWORD_BUTTON).send_keys(password)
+        driver.find_element(*RegistrationFormLocators.CREATE_ACCOUNT_BUTTON).click()
         # Проверки создание аккаунта и переход на главную страницу
-        assert driver.find_element(* MainPageLocators.PLACE_ADS_BUTTON).text == "Разместить объявление"
-        assert  WebDriverWait(driver, 10).until(expected_conditions.visibility_of_element_located(MainPageLocators.USER_LOGO))
+        assert driver.find_element(*MainPageLocators.PLACE_ADS_BUTTON).text == "Разместить объявление"
+        assert WebDriverWait(driver, 10).until(
+            expected_conditions.visibility_of_element_located(MainPageLocators.USER_LOGO))
         assert driver.find_element(*MainPageLocators.USER_NAME).text == "User."
 
 
