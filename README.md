@@ -5,8 +5,7 @@
 ## Структура
 - `conftest.py` — фикстура для Selenium WebDriver
 - `locators.py` — локаторы
-- `utils/` — BASE_URL, данные, генерация email
-- `tests/` — тесты (registration, login, logout, create_ad)
+- `tests/` — тесты (registration, login\logout, create_ad)
 
 ## Установка
 ```bash
